@@ -2,7 +2,8 @@
 SELECT COUNT(customer_id) FROM customers;
 
 --Уникальные сочетания городов и стран заказчиков
-SELECT DISTINCT(country, city) FROM customers;
+SELECT country, city FROM customers
+GROUP BY country, city;
 
 --Вывести компанию заказчика и ФИО сотрудника.
 --Заказчики и сотрудники из города London, а доставка идёт компанией Speedy Express
