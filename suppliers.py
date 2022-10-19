@@ -32,21 +32,27 @@ def write_sql_file(data):
             d['id'] = index
             contact = d['contact'].split(', ')
             address = d['address'].split('; ')
+
             d['company_name'] = d['company_name'].replace("'", "''")
             address[4] = address[4].replace("'", "''")
             d['homepage'] = d['homepage'].replace("'", "''")
-            request = f"""INSERT INTO suppliers VALUES ({d['id']}, '{d['company_name']}', '{contact[0]}', '{contact[1]}', '{address[0]}', '{address[1]}', '{address[2]}', '{address[3]}', '{address[4]}', '{d['phone']}', '{d['fax']}', '{d['homepage']}');\n"""
+
+            request = f"INSERT INTO suppliers VALUES ({d['id']}," \
+                      f" '{d['company_name']}', '{contact[0]}', '{contact[1]}'," \
+                      f" '{address[0]}', '{address[1]}', '{address[2]}', " \
+                      f"'{address[3]}', '{address[4]}', '{d['phone']}', " \
+                      f"'{d['fax']}', '{d['homepage']}');\n"
             index += 1
             file.write(request)
 
-        update_table_prod_1 = """\nALTER TABLE products ADD COLUMN id_suppliers INT REFERENCES suppliers(id);\n\n"""
+        update_table_prod_1 = "\nALTER TABLE products ADD COLUMN id_suppliers " \
+                              "INT REFERENCES suppliers(id);\n\n"
         file.write(update_table_prod_1)
         for d in data:
             product = [p.replace("'", "''") for p in d['products']]
 
             update_table_prod_2 = f"""UPDATE products SET id_suppliers = {d['id']} WHERE product_name IN ('{"', '".join(product)}');\n"""
             file.write(update_table_prod_2)
-
 
 
 def main():
