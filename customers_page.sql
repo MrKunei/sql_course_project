@@ -18,4 +18,4 @@ WHERE cus.city = 'London' AND emp.city = 'London' AND shippers.company_name = 'S
 SELECT company_name, orders.order_id
 FROM customers
 LEFT JOIN orders ON orders.customer_id = customers.customer_id
-WHERE customers.customer_id NOT IN (SELECT customer_id FROM orders);
+WHERE orders.order_id IS NULL;
