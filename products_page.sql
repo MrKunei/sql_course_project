@@ -6,5 +6,5 @@ SELECT product_name, units_in_stock, s.contact_name, s.phone
 FROM products
 LEFT JOIN suppliers s ON s.id = products.id_suppliers
 LEFT JOIN categories ON categories.category_id = products.category_id
-WHERE category_name IN ('Beverages', 'Seafood') AND units_in_stock > 20;
+WHERE category_name IN ('Beverages', 'Seafood') AND units_in_stock < 20 AND discontinued = 0;
 
