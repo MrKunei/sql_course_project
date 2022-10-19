@@ -14,7 +14,7 @@ LEFT JOIN employees as emp ON emp.employee_id = orders.employee_id
 LEFT JOIN shippers ON shippers.shipper_id = orders.ship_via
 WHERE cus.city = 'London' AND emp.city = 'London' AND shippers.company_name = 'Speedy Express';
 
---Найти заказчиков, не сделавших ни одного заказа. Вывести имя заказчика и customer_id.
+--Найти заказчиков, не сделавших ни одного заказа. Вывести имя заказчика и order_id.
 SELECT company_name, orders.order_id
 FROM customers
 LEFT JOIN orders ON orders.customer_id = customers.customer_id
